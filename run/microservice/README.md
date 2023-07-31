@@ -2,6 +2,21 @@
 
 A template repository for a Cloud Run microservice, written in Go.
 
+## Download template locally with gonew
+
+* Install [gonew](https://pkg.go.dev/golang.org/x/tools/cmd/gonew) if you have
+  not already.
+
+```bash
+go install golang.org/x/tools/cmd/gonew@latest
+```
+
+* Download this template locally:
+
+```bash
+gonew github.com/GoogleCloudPlatform/go-templates/run/microservice your.domain/microservice
+```
+
 ## Prerequisite
 
 * Enable the Cloud Run API via the CLI:

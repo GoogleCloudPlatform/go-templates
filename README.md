@@ -10,6 +10,11 @@ Some templates for building Go projects on Google Cloud. These are all currently
 - [pubsubfn](functions/pubsubfn/): Pub/Sub event handling Cloud Function template
 - [microservice](run/microservice/): Cloud Run microservice template
 
+## Download templates with gonew
+
+These templates were designed to work and be downloaded with
+[gonew](https://pkg.go.dev/golang.org/x/tools/cmd/gonew).
+
 ## Contributions
 
 Please see the [contributing guidelines](CONTRIBUTING.md)

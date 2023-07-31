@@ -3,6 +3,23 @@
 This project is a getting starter guide for working with a Pub/Sub event
 handling Cloud Functions.
 
+## Download template locally with gonew
+
+* Install [gonew](https://pkg.go.dev/golang.org/x/tools/cmd/gonew) if you have
+  not already.
+
+```bash
+go install golang.org/x/tools/cmd/gonew@latest
+```
+
+* Download this template locally:
+
+```bash
+gonew github.com/GoogleCloudPlatform/go-templates/functions/pubsubfn your.domain/pubsubfn
+```
+
+## Deploy
+
 ```bash
 # The name of the Pub/Sub topic that the Cloud Function will listen on
 EXPORT TOPIC_NAME=func-test

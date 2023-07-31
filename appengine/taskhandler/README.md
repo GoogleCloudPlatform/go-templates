@@ -3,6 +3,21 @@
 This project is a getting starter guide for working with App Engine task
 handlers in Go.
 
+## Download template locally with gonew
+
+* Install [gonew](https://pkg.go.dev/golang.org/x/tools/cmd/gonew) if you have
+  not already.
+
+```bash
+go install golang.org/x/tools/cmd/gonew@latest
+```
+
+* Download this template locally:
+
+```bash
+gonew github.com/GoogleCloudPlatform/go-templates/appengine/taskhandler your.domain/taskhandler
+```
+
 ## Deploy
 
 ```bash
