@@ -28,7 +28,7 @@ gcloud services enable artifactregistry.googleapis.com
 
 ## Features
 
-* **chi**: A request router and dispatcher
+* **gorilla/mux**: A request router and dispatcher
 * **Dockerfile**: Container build instructions
 * **SIGTERM handler**: Catch termination signal for cleanup before Cloud Run stops the container
 * **Structured logging w/ Log Correlation** JSON formatted logger, parsable by Cloud Logging, with [automatic correlation of container logs to a request log](https://cloud.google.com/run/docs/logging#correlate-logs).
