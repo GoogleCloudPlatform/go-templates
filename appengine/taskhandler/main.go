@@ -16,6 +16,7 @@ package main
 
 import (
 	"fmt"
+	"html"
 	"io"
 	"log"
 	"net/http"
@@ -82,5 +83,5 @@ func taskHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Set a non-2xx status code to indicate a failure in task processing that should be retried.
 	// For example, http.Error(w, "Internal Server Error: Task Processing", http.StatusInternalServerError)
-	fmt.Fprintln(w, output)
+	fmt.Fprintln(w, html.EscapeString(output))
 }
