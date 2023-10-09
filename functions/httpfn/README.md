@@ -30,7 +30,7 @@ gcloud functions deploy hello-http \
 --allow-unauthenticated
 ```
 
-*Note*, in projection environments consider removing the
+*Note*, in production environments consider removing the
 `--allow-unauthenticated` flag.
 
 ## Resources
