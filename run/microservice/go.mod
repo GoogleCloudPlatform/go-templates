@@ -7,7 +7,7 @@ require (
 	cloud.google.com/go/logging v1.7.0
 	github.com/gorilla/mux v1.8.0
 	google.golang.org/api v0.130.0
-	google.golang.org/grpc v1.56.2
+	google.golang.org/grpc v1.56.3
 )
 
 require (
