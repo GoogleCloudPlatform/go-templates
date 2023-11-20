@@ -1,6 +1,6 @@
 # HTTP Cloud Function (gen 2)
 
-This project is a getting starter guide for working with HTTP Cloud Functions.
+This project is a getting-started guide for working with HTTP Cloud Functions.
 
 ## Download template locally with gonew
 
@@ -30,7 +30,7 @@ gcloud functions deploy hello-http \
 --allow-unauthenticated
 ```
 
-*Note*, in projection environments consider removing the
+*Note*, in production environments, consider removing the
 `--allow-unauthenticated` flag.
 
 ## Resources
