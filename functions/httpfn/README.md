@@ -22,7 +22,7 @@ gonew github.com/GoogleCloudPlatform/go-templates/functions/httpfn your.domain/h
 ```bash
 gcloud functions deploy hello-http \
 --gen2 \
---runtime=go120 \
+--runtime=go122 \
 --region=us-central1 \
 --source=. \
 --entry-point=HelloHTTP \
