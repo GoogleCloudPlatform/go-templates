@@ -17,18 +17,9 @@ package main
 import (
 	"fmt"
 	"net/http"
-
-	"cloud.google.com/go/logging"
 )
 
 func (a *App) Handler(w http.ResponseWriter, r *http.Request) {
-	a.log.Log(logging.Entry{
-		Severity: logging.Info,
-		HTTPRequest: &logging.HTTPRequest{
-			Request: r,
-		},
-		Labels:  map[string]string{"arbitraryField": "custom entry"},
-		Payload: "Structured logging example.",
-	})
+	a.logger.Info("a structured logging example")
 	fmt.Fprintf(w, "Hello World!\n")
 }

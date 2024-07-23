@@ -16,25 +16,17 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
-
-	"cloud.google.com/go/compute/metadata"
-	"cloud.google.com/go/logging"
-	"github.com/gorilla/mux"
-	"google.golang.org/api/option"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 )
 
 type App struct {
 	*http.Server
-	projectID string
-	log       *logging.Logger
+	logger *slog.Logger
 }
 
 func main() {
@@ -49,8 +41,7 @@ func main() {
 	}
 	log.Printf("listening on port %s", port)
 
-	projectID := os.Getenv("GOOGLE_CLOUD_PROJECT")
-	app, err := newApp(ctx, port, projectID)
+	app, err := newApp(port)
 	if err != nil {
 		log.Fatalf("unable to initialize application: %v", err)
 	}
@@ -72,15 +63,7 @@ func main() {
 	log.Println("shutdown")
 }
 
-func newApp(ctx context.Context, port, projectID string) (*App, error) {
-	if projectID == "" {
-		projID, err := metadata.ProjectID()
-		if err != nil {
-			return nil, fmt.Errorf("unable to detect Project ID from GOOGLE_CLOUD_PROJECT or metadata server: %w", err)
-		}
-		projectID = projID
-	}
-
+func newApp(port string) (*App, error) {
 	app := &App{
 		Server: &http.Server{
 			Addr: ":" + port,
@@ -89,23 +72,12 @@ func newApp(ctx context.Context, port, projectID string) (*App, error) {
 			WriteTimeout:   10 * time.Second,
 			MaxHeaderBytes: 1 << 20,
 		},
-		projectID: projectID,
+		logger: slog.New(slog.NewJSONHandler(os.Stderr, nil)),
 	}
-
-	client, err := logging.NewClient(ctx, fmt.Sprintf("projects/%s", app.projectID),
-		// We don't need to make any requests when logging to stderr.
-		option.WithoutAuthentication(),
-		option.WithGRPCDialOption(
-			grpc.WithTransportCredentials(insecure.NewCredentials()),
-		))
-	if err != nil {
-		return nil, fmt.Errorf("unable to initialize logging client: %v", err)
-	}
-	app.log = client.Logger("test-log", logging.RedirectAsJSON(os.Stderr))
 
 	// Setup request router.
-	r := mux.NewRouter()
-	r.HandleFunc("/", app.Handler).Methods("GET")
-	app.Server.Handler = r
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /", app.Handler)
+	app.Server.Handler = mux
 	return app, nil
 }
