@@ -15,33 +15,17 @@
 package main
 
 import (
-	"context"
+	"log/slog"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
-
-	"cloud.google.com/go/logging"
-	"google.golang.org/api/option"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 )
 
 func TestHandler(t *testing.T) {
-	ctx := context.Background()
 	rr := httptest.NewRecorder()
 	req := httptest.NewRequest("GET", "http://example.com", nil)
-	client, err := logging.NewClient(ctx, "projects/testing",
-		option.WithoutAuthentication(),
-		option.WithGRPCDialOption(
-			grpc.WithTransportCredentials(insecure.NewCredentials()),
-		),
-	)
-	if err != nil {
-		t.Fatalf("unable to initialize logging client: %v", err)
-	}
 	app := &App{
-		log: client.Logger("test-log", logging.RedirectAsJSON(os.Stderr)),
+		logger: slog.Default(),
 	}
 
 	app.Handler(rr, req)
