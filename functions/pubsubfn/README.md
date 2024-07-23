@@ -30,7 +30,7 @@ gcloud pubsub topics create $TOPIC_NAME
 # Deploy the Cloud Function
 gcloud functions deploy hello-pubsub \
 --gen2 \
---runtime=go120 \
+--runtime=go122 \
 --region=us-central1 \
 --source=. \
 --entry-point=HelloPubSub \
