@@ -1,6 +1,6 @@
 module github.com/GoogleCloudPlatform/go-templates/functions/httpfn
 
-go 1.22
+go 1.22.0
 
 require github.com/GoogleCloudPlatform/functions-framework-go v1.8.1
 
